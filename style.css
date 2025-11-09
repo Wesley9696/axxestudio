@@ -1,0 +1,984 @@
+/* =================================================================
+   1. FONTES CUSTOMIZADAS (Gilroy .ttf)
+   ================================================================= */
+
+/* Para a versão SEMIBOLD (Peso 600) */
+@font-face {
+    font-family: 'Gilroy';
+    src: url('fonts/Gilroy-SemiBold.ttf') format('truetype'); 
+    font-weight: 600; 
+    font-style: normal;
+    font-display: swap; 
+}
+
+/* Para a versão REGULAR (Peso 400) */
+@font-face {
+    font-family: 'Gilroy';
+    src: url('fonts/fonts/Gilroy-Regular.ttf') format('truetype'); 
+    font-weight: 400; 
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* =================================================================
+   2. VARIÁVEIS, RESET E BASE
+   ================================================================= */
+:root {
+    --black-bg: #0A0A0A; 
+    --light-bg: #1A1A1A; /* Fundo de seção secundária */
+    
+    --cta-red: #FE0307; 
+    --cta-red-hover: #E00003;
+    --cta-red-transparent: rgba(254, 3, 7, 0.4);
+    --dark-red: #A30000; /* Vermelho mais escuro para detalhes */
+    --gradient-red-50: rgba(232, 55, 82, 0.048); /* #E83752 com 50% de transparência */
+    --menu-stroke-color: rgba(15, 9, 9, 0.56); /* #0F0909 com 56% de opacidade */
+    
+    --white-text: #FFFFFF;
+    --gray-text: #CCCCCC; 
+    --dark-gray-text: #888888; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gilroy', sans-serif; 
+    color: var(--white-text);
+    line-height: 1.6;
+    
+    /* Apenas cor de fundo e posicionamento */
+    background-color: var(--black-bg); 
+    position: relative; /* Essencial para que o ::before seja posicionado */
+    z-index: 1; /* Garante que o conteúdo (texto, menu) fique acima do ::before */
+    overflow-x: hidden; /* Evita barras de rolagem horizontais */
+}
+
+/* NOVO BLOCO: Camada de fundo com o SVG e opacidade */
+body::before {
+    content: '';
+    position: fixed; /* Fixa o fundo para cobrir a tela ao rolar */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Aplicação do SVG */
+    background-image: url('img/fundo_detalhado.svg');
+    background-size: auto;
+    background-repeat: repeat;
+    background-color: var(--black-bg); /* Garante a cor base */
+    
+    /* AQUI ESTÁ A OPACIDADE CORRIGIDA (50%) */
+    opacity: 0.10;
+    
+    z-index: -1; /* Coloca o fundo por trás de todos os elementos do body */
+}
+.container {
+    max-width: 1920px; 
+    margin: 0 auto;
+    padding: 0 20px; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Tipografia de Títulos */
+h1 { font-size: 3em; font-weight: 600; } 
+h2 { font-size: 2.5em; font-weight: 600; } 
+h3 { font-size: 1.5em; font-weight: 600; } 
+p { font-size: 1em; }
+
+
+/* =================================================================
+   3. BOTÕES (CTA)
+   ================================================================= */
+.btn-primary {
+    display: inline-block;
+    background: linear-gradient(to right, 
+        var(--cta-red) 60%,             
+        var(--cta-red-transparent) 100% 
+    );
+    color: var(--white-text);
+    padding: 28px 60px;
+    border-radius: 20px; 
+    font-weight: 600; 
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    transition: all 0.3s ease; 
+    border: none; 
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, 
+        var(--cta-red-hover) 60%, 
+        rgba(224, 0, 3, 0.6) 100% 
+    );
+    box-shadow: 0 2px 10px rgba(254, 3, 7, 0.6);
+}
+
+.btn-secondary {
+    display: block; 
+    background-color: var(--black-bg);
+  color: var(--white-text);
+    padding: 10px;;
+    border-radius: 10px;
+    font-weight: 600; 
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-red);
+    color: var(--white-text);
+}
+
+
+/* =================================================================
+   4. HEADER E HERO (Layout Flutuante e Full Screen - DESKTOP)
+   ================================================================= */
+
+/* 4.1. main-header: Container de Posicionamento Fixo */
+.main-header {
+    position: fixed; 
+    top: 25px; /* 25px do topo */
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0; 
+    background-color: transparent; 
+    box-shadow: none;
+}
+
+/* 4.2. menu-box: Estilos Visuais e Dimensões Fixas/Responsivas */
+.menu-box {
+    width: auto; 
+    margin-left: 100px;
+    margin-right: 100px;
+    height: 112px; 
+    position: relative;
+    padding: 25px;
+    background: linear-gradient(#0F0909, #0F0909) padding-box, 
+                radial-gradient(circle at center, #ffffff 0%, #8B0000 100%);
+    border: 1px solid transparent;
+    border-radius: 20px;
+}
+
+/* 4.3. header-content: Centralização Vertical */
+.header-content {
+    height: 100%; /* Ocupa a altura do menu-box */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.logo img {
+    height: 40px; 
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 90px; 
+}
+
+.main-nav a {
+    color: var(--white-text);
+    font-weight: 600; 
+    padding: 5px 0;
+    position: relative;
+}
+
+.main-nav a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to right, 
+        var(--gradient-red-50),      /* Começa com o vermelho vibrante */
+        var(--cta-red)     /* Transiciona para o vermelho escuro */
+    );
+}
+
+.header-cta {
+    font-size: 0.9em;
+    padding: 10px 20px;
+    border-radius: 50px; 
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    /* Layout and Positioning (Mantido) */
+    background-size: cover;
+    background-position: center;
+    padding: 150px 50px 50px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    background-image: url('img/hero_bg.png'); /* Substitua pelo nome do seu arquivo */
+    background-size: cover; /* ESSENCIAL: Garante que ocupe a tela inteira da seção (responsivo) */
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+.gallery-carousel {
+    display: flex;
+    max-height: 400px;
+    gap: 15px;
+    padding: 25px;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.gallery-item {
+    /* Dimensões base e visual */
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    
+    /* Largura base para todos os itens (começa pequeno) */
+    width: 80px; 
+    
+    /* ESSENCIAL: Adicionar 'width' à lista de propriedades com transição */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, width 0.3s ease-out;
+
+    /* Efeito de Escurecimento/Overlay */
+    display: flex;
+    align-items: flex-end;
+}
+
+.initial-large {
+    width: 350px; 
+}
+
+.small-item {
+    /* Garante que a escrita vertical seja usada APENAS quando for pequeno */
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.gallery-item:hover {
+    /* 1. Expande a largura para 350px, independentemente do tamanho inicial */
+    width: 350px;
+    
+    /* 2. Aumenta a escala (Zoom) e Z-index */
+    transform: scale(1.03); 
+    z-index: 10; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    /* 3. CORREÇÃO: Desativa a escrita vertical quando expandido para ler o conteúdo */
+    writing-mode: unset;
+    text-orientation: unset;
+}
+
+
+/* --- Estilos do Conteúdo (Texto) --- */
+
+.item-content {
+    color: white;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+}
+
+
+/* Redefinido para o item expandido/inicialmente grande */
+.gallery-item:hover .item-content,
+.initial-large .item-content { 
+    padding: 30px;
+}
+
+.gallery-item.is-active, 
+.gallery-item:hover {
+    /* Expande a largura para 350px no estado inicial e no hover */
+    width: 350px;
+    transform: scale(1.03);
+    /* Z-index e Zoom do Hover (Agora aplicado à classe .is-active também) */
+    transform: scale(1.03); 
+    z-index: 10; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    /* Desativa a escrita vertical quando expandido */
+    writing-mode: unset;
+    text-orientation: unset;
+}
+
+/* Garante que o texto do item ativo seja grande */
+.gallery-item.is-active .item-content { 
+    padding: 30px;
+}
+
+.large-item h3 { /* Renomeado para .initial-large h3 se for o item inicial */
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.large-item p {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.small-item h3 {
+    font-size: 1.2em;
+    margin: 0;
+    white-space: nowrap;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+}
+
+.hero-content h1 {
+    max-width: 800px;
+    margin: 40px auto 10px auto;
+    line-height: 1.2;
+    font-size: 2.5em; 
+}
+
+
+.hero-cta {
+
+    font-size: 1.2em;
+    padding: 15px;
+    display: block; /* Faz o botão ocupar a largura máxima disponível */
+    max-width: 560px; /* Largura máxima desejada */
+    width: 50%; /* Ocupa 90% da largura em telas menores para ser responsivo */
+    margin: 15px auto; /* Centraliza o botão na seção Hero */
+}
+
+
+
+/* =================================================================
+   5. SEÇÕES DE CONTEÚDO
+   ================================================================= */
+.patrocinadores-section {
+    border-width: 1px 0 1px 0; /* Topo (1px), Direita (0), Baixo (1px), Esquerda (0) */
+    
+    border-style: solid; /* Necessário ao usar border-width */
+    border-color: transparent; /* Necessário para que o border-image/background-clip funcione */
+
+    background: linear-gradient(#0F0909, #0F0909) padding-box,
+                radial-gradient(circle at center, #ffffff 0%, #8B0000 100%);
+    
+    padding: 10px 0;
+    text-align: center;
+
+}
+
+.patrocinadores-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; 
+}
+
+.patrocinio-label {
+    font-size: 1.1em;
+    font-weight: 600; 
+    color: var(--gray-text);
+}
+
+.patrocinadores-logos {
+    display: flex;
+    justify-content: center; /* Garante que o container centralize os logos */
+    align-items: center;
+    
+    /* CORREÇÃO: Espaçamento de 100 pixels entre os itens */
+    gap: 100px; 
+}
+.patrocinadores-logos img {
+    /* CORREÇÃO: Altura definida para 90 pixels */
+    height: 50px; 
+    
+    /* A largura se ajustará automaticamente (mantendo a proporção) */
+    width: auto; 
+    
+    filter: grayscale(100%) brightness(150%); 
+    opacity: 0.7;
+}
+.como-funciona-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.como-funciona-section h2 {
+    margin-bottom: 60px;
+}
+
+.funcionalidades-grid {
+    display: flex;
+    justify-content: center;
+    gap: 8px; 
+}
+
+.funcionalidade-item {
+    text-align: center;
+    width: 250px; 
+}
+
+.funcionalidade-item img {
+    height: 80px; 
+    margin-bottom: 20px;
+}
+
+.process-connector {
+    height: 1px; 
+    width: 200px; 
+    margin-top: 40px;
+    
+    object-fit: contain; 
+}
+
+.margin-top p {
+    margin-top: -10px;
+}
+
+.funcionalidade-item h3 {
+    margin-bottom: 5px;
+    color: var(--white-text);
+}
+
+.funcionalidade-item p {
+    color: var(--white-text);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.funcionalidade-item p span {
+    color: var(--dark-red);
+}
+
+.opcoes-projeto-section {
+    padding: 0px;
+    text-align: center;
+}
+
+.opcoes-projeto-content{
+    width: auto;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 60px 0;
+    background: linear-gradient(#0F0909, #0F0909) padding-box, 
+                radial-gradient(circle at center, #ffffff 0%, #8B0000 100%);
+    border: 1px solid transparent;
+    
+    border-radius: 25px;
+}
+
+.opcoes-projeto-section h2 {
+    margin-bottom: 60px;
+}
+
+.cards-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+.card {
+    background: linear-gradient(#0F0909, #0F0909) padding-box, 
+                radial-gradient(circle at center, #ffffff 0%, #8B0000 100%);
+    border: 1px solid transparent;
+    
+    border-radius: 25px;
+    padding: 40px 30px;
+    width: 280px; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.card h3 {
+    color: var(--white-text);
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.card .price {
+    font-size: 2em;
+    font-weight: 600; 
+    color: var(--dark-red);
+}
+
+.card .price small {
+    font-size: 0.4em;
+    color: var(--gray-text);
+    font-weight: 400;
+}
+
+.card ul {
+    color: var(--gray-text);
+    font-size: 0.8em;
+}
+
+.card ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.card ul li::before {
+    content: '✓'; 
+    color: var(--white-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+.agendamento-section {
+    padding: 50px 0px 0px 0px;
+    text-align: center;
+}
+
+.agendamento-section h2 {
+    margin-bottom: 40px;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #25D366; 
+    color: var(--white-text);
+    padding: 15px 40px;
+    border-radius: 15px;
+    font-weight: 600; 
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851;
+}
+
+.reels-section {
+    padding: 80px 0 100px 0;
+    text-align: center;
+}
+
+.reels-section h2 {
+    margin-bottom: 60px;
+}
+
+.reels-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Aumentei o gap para 30px para melhor espaçamento visual */
+    flex-wrap: wrap;
+}
+
+.reel-item {
+    width: 250px; /* Largura ajustada para 250px para melhor proporção vertical */
+    background-color: #0F0909; /* Fundo do card ligeiramente mais claro que o fundo do corpo */
+    border-radius: 8px; /* Arredondamento suave no card */
+    overflow: hidden; /* Garante que a imagem e a borda não vazem */
+    text-align: left;
+    
+    /* Borda sutil */
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+.reel-thumbnail {
+    position: relative;
+    width: 100%;
+    /* Altura ajustada para ser vertical (9:16 ou similar) */
+    padding-bottom: 160%; /* Proporção vertical aproximada */
+    background-color: #121212; /* Fundo da thumbnail antes de carregar a imagem */
+}
+
+.reel-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: var(--cta-red); /* O vermelho vibrante */
+    border-radius: 50%;
+    opacity: 0.9;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.play-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid var(--white-text); /* Triângulo branco de play */
+}
+
+.reel-info {
+    padding: 15px 15px 25px 15px; /* Mais padding embaixo */
+}
+
+.reel-title-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.red-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--cta-red);
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.reel-live-label {
+    color: var(--white-text);
+    font-size: 0.85em;
+    font-weight: 600; /* SemiBold */
+    margin-right: 5px;
+}
+
+.reel-metadata-label {
+    color: var(--cta-red); /* Vermelho para a tag PODCAST */
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reel-description {
+    color: var(--white-text);
+    font-size: 1em;
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+.reel-views {
+    color: var(--gray-text); /* Texto mais suave para as views */
+    font-size: 0.85em;
+}
+
+/* --- Removendo estilos antigos para evitar conflito --- */
+.reel-item img, .reel-item p { 
+    /* Estilos antigos conflitantes foram movidos ou substituídos */
+    border: none;
+    height: auto; 
+    margin: 0;
+    padding: 0;
+}
+
+/* =================================================================
+   6. FOOTER
+   ================================================================= */
+.main-footer {
+
+    padding: 20px 100px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links a {
+    color: var(--gray-text);
+    font-weight: 600; 
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--dark-red);
+}
+
+.social-media {
+    display: flex;
+    gap: 20px;
+}
+
+.social-media img {
+    height: 24px; 
+    filter: brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.social-media img:hover {
+    filter: brightness(1.2);
+}
+
+.footer-logo img {
+    width: 120px;
+    height: auto; 
+
+}
+
+.copyright {
+    color: var(--dark-gray-text);
+    font-size: 0.85em;
+    margin-top: 20px;
+}
+
+    .menu-toggle {
+        display: none;
+    }
+
+/* =================================================================
+   7. RESPONSIVIDADE (MOBILE - max-width: 992px e 768px)
+   ================================================================= */
+
+/* --- AJUSTES PARA TABLETS E DISPOSITIVOS MENORES (max-width: 992px) --- */
+@media (max-width: 992px) {
+    /* Menu Box: Margens reduzidas */
+    .menu-box {
+        margin-left: 20px;
+        margin-right: 20px;
+        height: 90px; /* Altura um pouco menor */
+        padding: 15px;
+    }
+    
+    /* Navegação: Reduz o gap e esconde o botão CTA para mobile */
+    .main-nav ul {
+        gap: 40px; /* Reduz o espaçamento do menu */
+    }
+    
+    /* Patrocinadores: Reduz o espaçamento das logos */
+    .patrocinadores-logos {
+        gap: 50px;
+    }
+    
+    .patrocinadores-logos img {
+        height: 70px; /* Reduz a altura da logo */
+    }
+    
+    /* Cards de Preço: Centraliza o container */
+    .opcoes-projeto-content {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .funcionalidade-item {
+        width: 180px; /* Reduz a largura dos itens */
+    }
+
+}
+
+
+/* --- AJUSTES PARA SMARTPHONES (max-width: 768px) --- */
+@media (max-width: 768px) {
+    
+    /* --- HEADER (Menu Hambúrguer) --- */
+    
+    /* 1. Oculta a Navegação e o CTA */
+    .main-nav, .header-cta {
+        display: none; 
+    }
+
+    .main-nav.open {
+        display: flex;
+        flex-direction: column;
+        
+        /* POSICIONAMENTO FULL SCREEN / FIXO */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Ocupa a altura total da tela */
+        
+        /* Fundo escuro semi-transparente que cobre a página */
+        background-color: rgba(10, 10, 10, 0.95); 
+        padding-top: 100px; /* Espaço para não cobrir o logo */
+        
+        justify-content: flex-start; 
+        align-items: center; 
+        
+        z-index: 99; /* Fica abaixo do botão toggle (z-index: 101) */
+        overflow-y: auto; /* Permite rolar se o menu for muito longo */
+    }
+    
+    /* 5. Estiliza os Links Abertos */
+    .main-nav.open ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px; /* Espaçamento entre os links */
+    }
+    
+    /* Garante que o CTA apareça no menu aberto */
+    .main-nav.open .header-cta {
+        display: block !important; /* Sobrescreve o 'display: none' */
+        margin-top: 30px;
+    }
+    
+    /* Garante que a barra de menu seja removida quando o menu abre */
+    .main-nav.open::before {
+        content: none;
+    }
+    
+    /* Evita scroll na página principal (reforço, complementa o JS) */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    /* 2. Mostra o botão Toggle/Hambúrguer (Adicionado ao HTML) */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        position: relative;
+        z-index: 101;
+    }
+
+    .menu-toggle .bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background-color: var(--white-text);
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    /* 3. Ajuste o Menu Box para celular */
+    .menu-box {
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 60px; 
+    }
+
+    .header-content {
+        /* Alinha logo à esquerda e hambúrguer à direita */
+        justify-content: space-between;
+    }
+
+    /* --- HERO SECTION --- */
+    
+    /* 1. Empilha as 4 imagens da Hero */
+    .hero-images {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .hero-image-item {
+        width: 80%; /* Ocupa a maior parte da largura */
+        margin: 0 auto;
+    }
+
+    .hero-content h1 {
+        font-size: 2em; /* Reduz o tamanho do título */
+    }
+
+    /* --- PATROCINADORES --- */
+    
+    .patrocinadores-logos {
+        flex-direction: column; /* Empilha as logos */
+        gap: 20px; /* Espaçamento vertical */
+    }
+    
+    .patrocinio-label {
+        margin-bottom: 10px; /* Espaço entre o label e as logos */
+    }
+
+    /* --- COMO FUNCIONA (Processo) --- */
+
+    .funcionalidades-grid {
+        flex-direction: column; /* Empilha os 3 passos */
+        gap: 0;
+    }
+    
+    /* Gira a linha de conexão para ficar vertical (90 graus) */
+    .process-connector {
+        transform: rotate(90deg); 
+        width: 50px; /* Largura reduzida para mobile */
+        margin: 10px 0;
+    }
+
+    .funcionalidade-item {
+        width: 100%; /* Ocupa a largura total */
+    }
+    
+    /* --- CARDS DE PREÇO --- */
+    .cards-grid {
+        gap: 20px;
+    }
+    
+    .card {
+        width: 90%; /* Força os cards a serem full-width */
+        margin: 0 auto;
+    }
+    
+    /* --- REELS --- */
+    .reels-grid {
+        /* Permite 2 colunas, mas força o empilhamento se não couber */
+        justify-content: space-around;
+        gap: 15px;
+    }
+n
+    .reel-item {
+        width: 45%; /* Permite 2 colunas */
+    }
+    
+    /* --- FOOTER --- */
+    .footer-content {
+        flex-direction: column; /* Empilha logo, links e social media */
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column; /* Empilha os links */
+        gap: 10px;
+    }
+
+    .small-item {
+        display: none;;
+    }
+}
