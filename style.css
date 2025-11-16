@@ -75,7 +75,7 @@ body::before {
 .container {
     max-width: 1920px; 
     margin: 0 auto;
-    padding: 0 20px; 
+    padding: 0 90px; 
 }
 
 a {
@@ -125,6 +125,7 @@ p {
     border: none;
     text-align: center;
 }
+
 
 .btn-primary:hover {
     background: linear-gradient(to right, 
@@ -187,7 +188,7 @@ p {
 }
 
 .logo img {
-    height: clamp(30px, 5vw, 40px);
+    height: clamp(60px, 5vw, 70px);
 }
 
 .main-nav ul {
@@ -200,7 +201,7 @@ p {
     font-weight: 600; 
     padding: 5px 0;
     position: relative;
-    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-size: clamp(1.2rem, 1.2vw, 1rem);
 }
 
 .main-nav a:hover::after {
@@ -390,8 +391,6 @@ p {
 .patrocinadores-logos img {
     height: clamp(40px, 6vw, 60px);
     width: auto; 
-    filter: grayscale(100%) brightness(150%); 
-    opacity: 0.3;
 }
 
 .como-funciona-section {
@@ -406,7 +405,7 @@ p {
 .funcionalidades-grid {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     flex-wrap: wrap;
 }
@@ -423,9 +422,10 @@ p {
 
 .process-connector {
     height: 1px; 
-    width: clamp(80px, 15vw, 200px);
+    width: clamp(80px, 25vw, 300px);
     margin-top: 40px;
     object-fit: contain;
+    border: 2px solid blue;
 }
 
 .margin-top p {
